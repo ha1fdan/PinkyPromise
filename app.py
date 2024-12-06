@@ -7,8 +7,12 @@ import os
 app = Flask(__name__)
 
 # File to store promises
-PROMISES_FILE = 'promises.json'
+PROMISES_FILE = '/data/promises.json'
 if not os.path.exists(PROMISES_FILE):
+    try:
+        os.mkdir('/data')
+    except FileExistsError:
+        pass
     with open(PROMISES_FILE, 'w') as f:
         json.dump({}, f)
 
@@ -89,4 +93,4 @@ def view_promise(promise_id):
     return render_template('view_promise.html', promise=promise, signing_disabled=signing_disabled)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)

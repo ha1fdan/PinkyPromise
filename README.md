@@ -13,8 +13,8 @@ Pinky Promise is a simple Flask application for creating, viewing, and signing p
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/pinky-promise.git
-   cd pinky-promise
+   git clone https://github.com/ha1fdan/pinkypromise.git
+   cd pinkypromise
    ```
 
 2. Create a virtual environment:
