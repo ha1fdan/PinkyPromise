@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Pinky Promise Details{% endblock %}
+
+{% block content %}
+<div class="space-y-4">
+    <div class="bg-pink-50 p-4 rounded-md">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Promise Details</h2>
+        <p class="text-gray-700">{{ promise.description }}</p>
+        
+        <div class="mt-2 text-sm text-gray-600">
+            <p><strong>Created by:</strong> {{ promise.creator }}</p>
+            <p><strong>Due by:</strong> {{ promise.due_date }}</p>
+        </div>
+    </div>
+
+    <div class="bg-pink-50 p-4 rounded-md">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Signatures ({{ promise.signatures|length }})</h3>
+        {% if promise.signatures %}
+            <ul class="space-y-2">
+                {% for signature in promise.signatures %}
+                    <li class="bg-white p-2 rounded-md shadow-sm">
+                        <span class="pinky-promise">{{ signature.name }}</span> - 
+                        <span class="text-sm text-gray-500">
+                            Signed on {{ signature.signed_at.split('T')[0] }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-600">No signatures yet</p>
+        {% endif %}
+    </div>
+
+    {% if signing_disabled %}
+        <div class="bg-pink-50 p-4 rounded-md">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Signing Disabled</h3>
+            <p class="text-gray-600">This promise has already been signed.</p>
+        </div>
+    {% endif %}
+    {% if not signing_disabled %}
+    <form method="POST" class="space-y-4">
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+            <input type="text" id="name" name="name" required 
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-300 focus:ring focus:ring-pink-200 focus:ring-opacity-50">
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+            Sign Pinky Promise
+        </button>
+    </form>
+    {% endif %}
+    
+    {% if signing_disabled %}
+    <div class="text-center text-sm text-gray-600 mt-4">
+        <p>Share this link to get signatures:</p>
+        <input type="text" readonly 
+               value="{{ request.host_url }}promise/{{ promise.id }}" 
+               class="w-full text-center bg-gray-100 rounded-md p-2 mt-2">
+    </div>
+    {% endif %}
+    {% if not signing_disabled %}
+    <div class="text-center text-sm text-gray-600 mt-4">
+        <p>Share the link to this promise:</p>
+        <input type="text" readonly 
+               value="{{ request.host_url }}promise/{{ promise.id }}" 
+               class="w-full text-center bg-gray-100 rounded-md p-2 mt-2">
+    </div>
+    {% endif %}
+    
+</div>
+{% endblock %}

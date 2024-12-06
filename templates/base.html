@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pinky Promise{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--<link rel="stylesheet" href="/static/styles.css">-->
+    <style>
+        body {
+            background-color: #FFF0F5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+        <h1 class="text-3xl font-bold text-center text-pink-600 mb-6">
+            Pinky Promise 🤙
+        </h1>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
