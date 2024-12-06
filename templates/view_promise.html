@@ -53,7 +53,7 @@
     </form>
     {% endif %}
     
-    {% if signing_disabled %}
+    {% if not signing_disabled %}
     <div class="text-center text-sm text-gray-600 mt-4">
         <p>Share this link to get signatures:</p>
         <input type="text" readonly 
@@ -61,7 +61,7 @@
                class="w-full text-center bg-gray-100 rounded-md p-2 mt-2">
     </div>
     {% endif %}
-    {% if not signing_disabled %}
+    {% if signing_disabled %}
     <div class="text-center text-sm text-gray-600 mt-4">
         <p>Share the link to this promise:</p>
         <input type="text" readonly 
