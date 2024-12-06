@@ -1,0 +1,7 @@
+services:
+  app:
+    image: ha1fdan/pinky-promise
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/data:rw
